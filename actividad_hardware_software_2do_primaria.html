@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Aprendo Computación: Hardware y Software</title>
+<style>
+  :root{--blue:#2864dc;--purple:#7653d6;--yellow:#ffcf4a;--green:#2ca66f;--red:#d94b55;--ink:#24304a;--paper:#f5f8ff}
+  *{box-sizing:border-box}
+  body{margin:0;font-family:"Trebuchet MS",Arial,sans-serif;color:var(--ink);background:linear-gradient(135deg,#e8f2ff,#fff5d8);line-height:1.5}
+  header{padding:28px 16px;text-align:center;background:linear-gradient(120deg,#2864dc,#7653d6);color:#fff}
+  header h1{margin:0;font-size:clamp(1.7rem,4vw,2.6rem)}
+  header p{margin:8px auto 0;max-width:700px}
+  main{max-width:980px;margin:22px auto;padding:0 14px 35px}
+  .student{display:flex;gap:10px;flex-wrap:wrap;align-items:center;background:#fff;padding:14px;border-radius:18px;box-shadow:0 5px 18px #24304a12}
+  .student label{font-weight:bold}
+  .student input{flex:1;min-width:180px;padding:10px;border:2px solid #dce4f5;border-radius:10px;font:inherit}
+  section{background:#fff;border-radius:22px;padding:clamp(16px,3vw,26px);margin-top:20px;box-shadow:0 8px 22px #24304a12}
+  h2{margin-top:0;color:var(--blue);font-size:1.45rem}
+  .tag{display:inline-block;background:#fff0b9;color:#6b4d00;border-radius:99px;padding:4px 10px;font-weight:bold;font-size:.85rem;margin-bottom:8px}
+  .video-scene{background:linear-gradient(#dff4ff,#f4fbff);border:3px solid #c8e9ff;border-radius:18px;padding:18px;text-align:center;overflow:hidden}
+  .computer{display:flex;justify-content:center;align-items:center;gap:12px;flex-wrap:wrap;min-height:155px}
+  .monitor{width:150px;height:100px;border:8px solid #40516f;border-radius:12px;background:#b9efff;position:relative;animation:bob 2.2s ease-in-out infinite}
+  .screen-face{font-size:42px;line-height:84px}
+  .monitor:after{content:"";position:absolute;width:45px;height:8px;background:#40516f;bottom:-18px;left:44px;border-radius:4px}
+  .keyboard{font-size:46px;animation:wiggle 1.8s infinite}
+  .mouse{font-size:43px;animation:wiggle 2s infinite reverse}
+  .speech{font-size:1.1rem;font-weight:bold;margin:18px auto 6px;max-width:620px;min-height:54px}
+  .controls{display:flex;justify-content:center;gap:10px;flex-wrap:wrap;margin-top:12px}
+  button{border:0;border-radius:12px;background:var(--blue);color:#fff;padding:11px 17px;font:inherit;font-weight:bold;cursor:pointer;box-shadow:0 3px 0 #1945a2;transition:transform .12s}
+  button:hover{transform:translateY(-2px)}
+  button:focus-visible,.choice:focus-visible,.item:focus-visible{outline:3px solid #ffb000;outline-offset:3px}
+  .secondary{background:var(--purple);box-shadow:0 3px 0 #4b319c}
+  .muted{color:#66728b;font-size:.95rem}
+  .question{border:2px solid #e5eafa;border-radius:15px;padding:14px;margin:12px 0}
+  .question p{font-weight:bold;margin:0 0 9px}
+  .options{display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:8px}
+  .choice{background:#f2f5ff;border:2px solid #dce4ff;border-radius:11px;padding:10px;text-align:left;cursor:pointer;color:var(--ink);font:inherit}
+  .choice.correct{background:#e3f8eb;border-color:var(--green)}
+  .choice.wrong{background:#fff0f0;border-color:var(--red)}
+  .feedback{font-weight:bold;min-height:24px;margin-top:8px}
+  .score{font-weight:bold;background:#eaf2ff;padding:10px 14px;border-radius:12px;display:inline-block}
+  .drag-layout{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:16px}
+  .items{display:flex;flex-wrap:wrap;gap:10px;align-content:start}
+  .item{padding:10px 13px;background:#fff4cc;border:2px solid #f0d36d;border-radius:12px;cursor:grab;font-weight:bold;user-select:none}
+  .item.selected{outline:3px solid var(--purple)}
+  .dropzone{border:3px dashed #9e8be8;background:#f7f3ff;border-radius:18px;min-height:175px;padding:14px}
+  .dropzone h3{margin:0 0 8px;color:var(--purple)}
+  .dropzone.over{background:#eee5ff}
+  .dropzone .item{background:#e6f8ed;border-color:#8bd4a8;cursor:default}
+  .feedback-box{padding:12px;border-radius:12px;background:#f3f6fc;margin-top:12px;min-height:45px}
+  footer{text-align:center;padding:18px;color:#66728b}
+  @keyframes bob{0%,100%{transform:translateY(0)}50%{transform:translateY(-8px)}}
+  @keyframes wiggle{0%,100%{transform:rotate(0)}25%{transform:rotate(-8deg)}75%{transform:rotate(8deg)}}
+  @media(prefers-reduced-motion:reduce){*,*:before,*:after{animation:none!important;transition:none!important}}
+</style>
+</head>
+<body>
+<header>
+  <h1>💻 ¡Misión Computadora!</h1>
+  <p>Aprende qué es el <strong>hardware</strong> y el <strong>software</strong> jugando.</p>
+</header>
+<main>
+  <div class="student">
+    <label for="nombre">Mi nombre:</label>
+    <input id="nombre" type="text" placeholder="Escribe tu nombre">
+    <span>⭐ ¡Tú puedes!</span>
+  </div>
+
+  <section id="sesion1">
+    <span class="tag">SESIÓN 1 · MIRA Y APRENDE</span>
+    <h2>🎬 ¿Hardware o software?</h2>
+    <p>¡Observa esta mini animación y escucha la explicación! Puedes avanzar las escenas con el botón.</p>
+    <div class="video-scene" aria-live="polite">
+      <div class="computer" id="escena">
+        <div class="monitor"><div class="screen-face">😊</div></div>
+        <div class="keyboard" aria-hidden="true">⌨️</div>
+        <div class="mouse" aria-hidden="true">🖱️</div>
+      </div>
+      <div class="speech" id="narracion">¡Hola! Una computadora tiene partes que podemos tocar y programas que nos ayudan a trabajar.</div>
+      <div class="controls">
+        <button type="button" id="anterior" class="secondary">◀ Anterior</button>
+        <button type="button" id="siguiente">Siguiente ▶</button>
+        <button type="button" id="escuchar" class="secondary">🔊 Escuchar</button>
+      </div>
+      <p class="muted" id="contador">Escena 1 de 4</p>
+    </div>
+    <p><strong>Recuerda:</strong> el <strong>hardware</strong> son las partes físicas que podemos tocar, como el monitor y el teclado. El <strong>software</strong> son los programas y aplicaciones, como Paint o un juego.</p>
+  </section>
+
+  <section id="sesion2">
+    <span class="tag">SESIÓN 2 · ELIGE LA RESPUESTA</span>
+    <h2>🧩 ¿Cuáles son partes de la computadora?</h2>
+    <p>Lee cada pregunta y elige un inciso. ¡Busca las partes que puedes tocar: eso es hardware!</p>
+    <div id="quiz">
+      <div class="question" data-answer="b">
+        <p>1. ¿Cuál es una parte física de la computadora?</p>
+        <div class="options">
+          <button class="choice" data-choice="a">a) Paint</button>
+          <button class="choice" data-choice="b">b) Teclado</button>
+          <button class="choice" data-choice="c">c) Un videojuego</button>
+        </div><div class="feedback" aria-live="polite"></div>
+      </div>
+      <div class="question" data-answer="c">
+        <p>2. ¿Qué usamos para ver imágenes y palabras?</p>
+        <div class="options">
+          <button class="choice" data-choice="a">a) Bocinas</button>
+          <button class="choice" data-choice="b">b) Ratón</button>
+          <button class="choice" data-choice="c">c) Monitor</button>
+        </div><div class="feedback" aria-live="polite"></div>
+      </div>
+      <div class="question" data-answer="a">
+        <p>3. ¿Qué parte movemos para señalar algo en la pantalla?</p>
+        <div class="options">
+          <button class="choice" data-choice="a">a) Ratón o mouse</button>
+          <button class="choice" data-choice="b">b) Procesador de texto</button>
+          <button class="choice" data-choice="c">c) Juego</button>
+        </div><div class="feedback" aria-live="polite"></div>
+      </div>
+      <div class="question" data-answer="b">
+        <p>4. ¿Qué parte usamos para escribir letras y números?</p>
+        <div class="options">
+          <button class="choice" data-choice="a">a) Cámara</button>
+          <button class="choice" data-choice="b">b) Teclado</button>
+          <button class="choice" data-choice="c">c) Calculadora (programa)</button>
+        </div><div class="feedback" aria-live="polite"></div>
+      </div>
+    </div>
+    <p class="score" id="puntaje">Puntaje: 0 de 4</p>
+    <button type="button" id="reiniciarQuiz" class="secondary">Volver a intentarlo</button>
+  </section>
+
+  <section id="sesion3">
+    <span class="tag">SESIÓN 3 · JUEGO INTERACTIVO</span>
+    <h2>📦 ¡Guarda el software en la cajita!</h2>
+    <p>Arrastra cada <strong>programa</strong> a la caja morada. Si no puedes arrastrarlo, tócalo y después toca la caja. Si eliges una parte física, el juego te avisará que hay un error.</p>
+    <div class="drag-layout">
+      <div>
+        <h3>Tarjetas para clasificar</h3>
+        <div class="items" id="tarjetas">
+          <div class="item" draggable="true" tabindex="0" role="button" aria-label="Paint, programa" data-type="software">🎨 Paint</div>
+          <div class="item" draggable="true" tabindex="0" role="button" aria-label="Teclado, parte física" data-type="hardware">⌨️ Teclado</div>
+          <div class="item" draggable="true" tabindex="0" role="button" aria-label="Juego de computadora, programa" data-type="software">🎮 Juego de computadora</div>
+          <div class="item" draggable="true" tabindex="0" role="button" aria-label="Monitor, parte física" data-type="hardware">🖥️ Monitor</div>
+          <div class="item" draggable="true" tabindex="0" role="button" aria-label="Calculadora, programa" data-type="software">🧮 Calculadora (app)</div>
+          <div class="item" draggable="true" tabindex="0" role="button" aria-label="Ratón, parte física" data-type="hardware">🖱️ Ratón</div>
+          <div class="item" draggable="true" tabindex="0" role="button" aria-label="Procesador de textos, programa" data-type="software">📝 Procesador de textos</div>
+          <div class="item" draggable="true" tabindex="0" role="button" aria-label="Bocinas, parte física" data-type="hardware">🔊 Bocinas</div>
+        </div>
+      </div>
+      <div class="dropzone" id="caja" tabindex="0" aria-label="Caja para colocar software">
+        <h3>📦 CAJA DEL SOFTWARE</h3>
+        <p class="muted">¡Aquí van los programas!</p>
+        <div id="dentroCaja" class="items"></div>
+      </div>
+    </div>
+    <div class="feedback-box" id="mensajeJuego" aria-live="polite">¡Empieza! Elige un programa y llévalo a la caja.</div>
+    <p class="score" id="progreso">Software correcto: 0 de 4</p>
+    <div class="controls">
+      <button type="button" id="revisar">Revisar mi trabajo</button>
+      <button type="button" id="reiniciarJuego" class="secondary">Reiniciar juego</button>
+    </div>
+  </section>
+  <section>
+    <h2>🏆 ¡Terminaste la misión!</h2>
+    <p>Antes de salir, recuerda:</p>
+    <ul>
+      <li><strong>Hardware:</strong> las partes físicas que podemos tocar.</li>
+      <li><strong>Software:</strong> los programas y aplicaciones que usamos en la computadora.</li>
+    </ul>
+    <p class="muted">Muestra tu puntaje a tu maestra cuando termines.</p>
+    <button type="button" onclick="window.print()">🖨️ Imprimir mi resultado</button>
+  </section>
+</main>
+<footer>Actividad de Computación · 2.º de primaria · ¡Aprender es divertido!</footer>
+<script>
+const escenas = [
+  {emoji:"😊", texto:"¡Hola! Una computadora tiene partes que podemos tocar y programas que nos ayudan a trabajar."},
+  {emoji:"👋", texto:"Hardware es lo físico: monitor, teclado, ratón y bocinas. ¡Podemos tocarlos!"},
+  {emoji:"🎨", texto:"Software son los programas: Paint, juegos y aplicaciones. No podemos tocarlos como un objeto."},
+  {emoji:"🌟", texto:"¡Muy bien! Hardware son las partes; software son los programas. ¡Ahora vamos a jugar!"}
+];
+let escenaActual=0;
+function mostrarEscena(){
+  document.querySelector("#escena .screen-face").textContent=escenas[escenaActual].emoji;
+  document.getElementById("narracion").textContent=escenas[escenaActual].texto;
+  document.getElementById("contador").textContent=`Escena ${escenaActual+1} de ${escenas.length}`;
+}
+document.getElementById("siguiente").addEventListener("click",()=>{escenaActual=(escenaActual+1)%escenas.length;mostrarEscena()});
+document.getElementById("anterior").addEventListener("click",()=>{escenaActual=(escenaActual-1+escenas.length)%escenas.length;mostrarEscena()});
+document.getElementById("escuchar").addEventListener("click",()=>{
+  if(!("speechSynthesis" in window)){alert("Tu navegador no tiene lectura de voz disponible. Lee el texto en pantalla.");return}
+  speechSynthesis.cancel();
+  const voz=new SpeechSynthesisUtterance(escenas[escenaActual].texto);voz.lang="es-MX";voz.rate=0.85;speechSynthesis.speak(voz);
+});
+let aciertosQuiz=0;
+function actualizarPuntaje(){document.getElementById("puntaje").textContent=`Puntaje: ${aciertosQuiz} de 4`}
+document.querySelectorAll(".question").forEach(pregunta=>{
+  pregunta.querySelectorAll(".choice").forEach(boton=>{
+    boton.addEventListener("click",()=>{
+      if(pregunta.dataset.done==="true")return;
+      const bien=boton.dataset.choice===pregunta.dataset.answer;
+      const feedback=pregunta.querySelector(".feedback");
+      if(bien){boton.classList.add("correct");feedback.textContent="¡Correcto! ⭐";pregunta.dataset.done="true";aciertosQuiz++;actualizarPuntaje()}
+      else{boton.classList.add("wrong");feedback.textContent="¡Ups! Intenta otra respuesta. Recuerda: hardware se puede tocar."}
+    });
+  });
+});
+document.getElementById("reiniciarQuiz").addEventListener("click",()=>{
+  aciertosQuiz=0;
+  document.querySelectorAll(".question").forEach(q=>{delete q.dataset.done;q.querySelector(".feedback").textContent="";q.querySelectorAll(".choice").forEach(b=>b.classList.remove("correct","wrong"))});
+  actualizarPuntaje();
+});
+let seleccionada=null, softwareCorrecto=new Set();
+const tarjetas=document.getElementById("tarjetas"), caja=document.getElementById("caja"), dentro=document.getElementById("dentroCaja");
+function mensaje(texto){document.getElementById("mensajeJuego").textContent=texto}
+function actualizarProgreso(){document.getElementById("progreso").textContent=`Software correcto: ${softwareCorrecto.size} de 4`}
+function colocar(item){
+  if(!item)return;
+  if(item.dataset.type==="software"){
+    dentro.appendChild(item);item.draggable=false;item.classList.remove("selected");
+    softwareCorrecto.add(item.textContent.trim());seleccionada=null;
+    mensaje("¡Muy bien! 🎉 ¡Eso es software, un programa!");actualizarProgreso();
+  }else{
+    mensaje("¡Ups! ❌ Eso es hardware: una parte física. Intenta con un programa como Paint o un juego.");
+    item.classList.remove("selected");seleccionada=null;
+  }
+}
+document.querySelectorAll(".item").forEach(item=>{
+  item.addEventListener("dragstart",e=>{e.dataTransfer.setData("text/plain","item");seleccionada=item});
+  item.addEventListener("click",()=>{
+    if(item.parentElement===dentro)return;
+    document.querySelectorAll(".item.selected").forEach(i=>i.classList.remove("selected"));
+    seleccionada=item;item.classList.add("selected");mensaje("Ahora toca la caja morada para intentar colocar esta tarjeta.");
+  });
+  item.addEventListener("keydown",e=>{if(e.key==="Enter"||e.key===" "){e.preventDefault();item.click()}});
+});
+caja.addEventListener("dragover",e=>{e.preventDefault();caja.classList.add("over")});
+caja.addEventListener("dragleave",()=>caja.classList.remove("over"));
+caja.addEventListener("drop",e=>{e.preventDefault();caja.classList.remove("over");colocar(seleccionada)});
+caja.addEventListener("click",()=>{if(seleccionada)colocar(seleccionada)});
+caja.addEventListener("keydown",e=>{if((e.key==="Enter"||e.key===" ")&&seleccionada){e.preventDefault();colocar(seleccionada)}});
+document.getElementById("revisar").addEventListener("click",()=>{
+  if(softwareCorrecto.size===4)mensaje("¡Excelente! 🏆 Clasificaste todos los programas correctamente.");
+  else mensaje(`¡Buen esfuerzo! Llevaste ${softwareCorrecto.size} de 4 programas a la caja. Busca las tarjetas de programas que quedan.`);
+});
+document.getElementById("reiniciarJuego").addEventListener("click",()=>{
+  [...dentro.children].forEach(item=>{item.draggable=true;tarjetas.appendChild(item)});
+  softwareCorrecto.clear();seleccionada=null;document.querySelectorAll(".item").forEach(i=>i.classList.remove("selected"));
+  mensaje("Juego reiniciado. ¡Inténtalo de nuevo!");actualizarProgreso();
+});
+</script>
+</body>
+</html>
